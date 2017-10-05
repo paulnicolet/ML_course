@@ -2,12 +2,11 @@
 """Function used to compute the loss."""
 
 def compute_loss(y, tx, w):
-    """Calculate the loss.
+	"""Compute loss using MSE or MAE."""
+	e = y - tx.dot(w)
 
-    You can calculate the loss using mse or mae.
-    """
-    # ***************************************************
-    # INSERT YOUR CODE HERE
-    # TODO: compute loss by MSE / MAE
-    # ***************************************************
-    raise NotImplementedError
+	#MAE
+	#return (1.0 / len(y)) * np.sum(np.abs(e))
+
+	# MSE
+	return (1.0 / (2 * len(y))) * e.T.dot(e)
