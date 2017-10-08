@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """Function used to compute the loss."""
+import numpy as np
 
 def compute_loss(y, tx, w, error_type='mae'):
 	e = y - tx.dot(w)
