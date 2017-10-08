@@ -3,21 +3,16 @@ from costs import compute_loss
 
 """Gradient Descent"""
 
-def compute_gradient_mse(y, tx, w):
-    """Compute gradient for MSE."""
+def compute_gradient(y, tx, w, error_type='mae'):
     e = y - tx.dot(w)
-    return (-1.0 / len(y)) * tx.T.dot(e)
 
-def compute_subgradient_mae(y, tx, w):
-    """Compute one of the subgradient for MAE."""
-    e = y - tx.dot(w)
-    s = np.sign(e).reshape(-1, 1)
-    return np.sum(-tx * s, axis=0) / len(y) 
-
-def compute_gradient(y, tx, w):
-    """Compute the gradient."""
-    return compute_gradient_mse(y, tx, w)
-    #return compute_subgradient_mae(y, tx, w)
+    if error_type == 'mse':
+        return (-1.0 / len(y)) * tx.T.dot(e)
+    elif error_type == 'mae':
+        # Note: this computes one of the subgradient if MAE not differentiable in w
+        return (-1 / len(y)) * (tx.T.dot(np.sign(e)))
+    else:
+        raise ValueError("error_type must be 'mse' or 'mae'")
 
 
 def gradient_descent(y, tx, initial_w, max_iters, gamma):

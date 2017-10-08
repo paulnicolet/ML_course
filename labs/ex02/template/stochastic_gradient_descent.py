@@ -2,9 +2,9 @@
 from gradient_descent import compute_gradient
 """Stochastic Gradient Descent"""
 
-def compute_stoch_gradient(y, tx, w):
+def compute_stoch_gradient(y, tx, w, error_type='mae'):
     """Compute a stochastic gradient from just few examples n and their corresponding y_n labels."""
-    return compute_gradient(y, tx, w)
+    return compute_gradient(y, tx, w, error_type)
 
 
 def stochastic_gradient_descent(y, tx, initial_w, batch_size, max_iters, gamma):
