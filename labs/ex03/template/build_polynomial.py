@@ -3,13 +3,15 @@
 
 import numpy as np
 
-
 def build_poly(x, degree):
     """polynomial basis functions for input data x, for j=0 up to j=degree."""
-    # ***************************************************
-    # INSERT YOUR CODE HERE
-    # polynomial basis function: TODO
-    # this function should return the matrix formed
-    # by applying the polynomial basis to the input data
-    # ***************************************************
-    raise NotImplementedError
+    if len(x.shape) > 1:
+    	if x.shape[1] > 1:
+    		raise ValueError('x must be a vector')
+    	x = x.ravel()
+    	
+    phi = np.zeros((degree + 1, len(x)))
+    for d in range(degree + 1):
+    	phi[d] = x**d
+
+    return phi.T
